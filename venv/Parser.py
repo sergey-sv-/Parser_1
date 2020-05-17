@@ -30,6 +30,7 @@ def get_content(html):
             'Price UAH': item.find('span', class_='i-block').find_next('span').get_text()
         })
 
+    print(cars)
     return cars
 
 
