@@ -13,7 +13,8 @@ def get_html(url, params=None):
 
 def get_pages_count(html):
     r = requests.get(url, headers=HEADERS, params=params)
-    pagination = soup.find_all()
+    pagination = soup.find_all('span', class_='mhide')
+    print(pagination)
 
 
 def get_content(html):
@@ -30,14 +31,14 @@ def get_content(html):
             'Price UAH': item.find('span', class_='i-block').find_next('span').get_text()
         })
 
-    print(cars)
     return cars
 
 
 def parse():
     html = get_html(URL)
     if html.status_code == 200:
-        cars = get_content(html.text)
+        pages_count = get_pages_count(html.text)
+        # cars = get_content(html.text)
     else:
         print('Error')
 
